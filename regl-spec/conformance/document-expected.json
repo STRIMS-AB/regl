@@ -1,0 +1,318 @@
+[
+  {
+    "id": "case/valid single field/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/valid single field/missing",
+    "findings": "valid=false\nERROR RULE_FAILED name notNull"
+  },
+  {
+    "id": "case/valid single field/null",
+    "findings": "valid=false\nERROR RULE_FAILED name notNull"
+  },
+  {
+    "id": "case/valid single field/too short",
+    "findings": "valid=false\nERROR RULE_FAILED name minLength"
+  },
+  {
+    "id": "case/valid single field/wrong type",
+    "findings": "valid=false\nERROR TYPE_MISMATCH name -"
+  },
+  {
+    "id": "case/nested path/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/nested path/missing",
+    "findings": "valid=false\nERROR RULE_FAILED server.port notNull"
+  },
+  {
+    "id": "case/nested path/null ancestor",
+    "findings": "valid=false\nERROR RULE_FAILED server.port notNull"
+  },
+  {
+    "id": "case/nested path/scalar ancestor",
+    "findings": "valid=false\nERROR UNREACHABLE server.port -"
+  },
+  {
+    "id": "case/nested path/list ancestor",
+    "findings": "valid=false\nERROR UNREACHABLE server.port -"
+  },
+  {
+    "id": "case/nested path/below bound",
+    "findings": "valid=false\nERROR RULE_FAILED server.port greaterThan"
+  },
+  {
+    "id": "case/nested path/wrong leaf type",
+    "findings": "valid=false\nERROR TYPE_MISMATCH server.port -"
+  },
+  {
+    "id": "case/nested path/fractional leaf",
+    "findings": "valid=false\nERROR TYPE_MISMATCH server.port -"
+  },
+  {
+    "id": "case/null short-circuits the chain/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/null short-circuits the chain/null",
+    "findings": "valid=false\nERROR RULE_FAILED port notNull"
+  },
+  {
+    "id": "case/null short-circuits the chain/missing",
+    "findings": "valid=false\nERROR RULE_FAILED port notNull"
+  },
+  {
+    "id": "case/optional field/absent is accepted",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/optional field/null is accepted",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/optional field/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/wildcard over a list/all valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/wildcard over a list/missing list yields nothing",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/wildcard over a list/null list yields nothing",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/wildcard over a list/empty list",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/wildcard over a list/not a list",
+    "findings": "valid=false\nERROR NOT_A_LIST servers.*.port -"
+  },
+  {
+    "id": "case/wildcard over a list/element below bound",
+    "findings": "valid=false\nERROR RULE_FAILED servers.0.port greaterThan"
+  },
+  {
+    "id": "case/wildcard over a list/element null",
+    "findings": "valid=false\nERROR RULE_FAILED servers.0.port notNull"
+  },
+  {
+    "id": "case/wildcard over a list/elements are scalars",
+    "findings": "valid=false\nERROR UNREACHABLE servers.*.port -"
+  },
+  {
+    "id": "case/list field and its elements/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/list field and its elements/missing",
+    "findings": "valid=false\nERROR RULE_FAILED tags notNull"
+  },
+  {
+    "id": "case/list field and its elements/empty list",
+    "findings": "valid=false\nERROR RULE_FAILED tags range"
+  },
+  {
+    "id": "case/list field and its elements/duplicate items",
+    "findings": "valid=false\nERROR RULE_FAILED tags unique"
+  },
+  {
+    "id": "case/list field and its elements/empty element",
+    "findings": "valid=false\nERROR RULE_FAILED tags.1 notEmpty"
+  },
+  {
+    "id": "case/list field and its elements/null element",
+    "findings": "valid=false\nERROR RULE_FAILED tags.0 notNull"
+  },
+  {
+    "id": "case/list field and its elements/wrong element type",
+    "findings": "valid=false\nERROR TYPE_MISMATCH tags.1 -"
+  },
+  {
+    "id": "case/list field and its elements/list is not a list",
+    "findings": "valid=false\nERROR TYPE_MISMATCH tags -\nERROR NOT_A_LIST tags.* -"
+  },
+  {
+    "id": "case/any field/allowed",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/any field/missing",
+    "findings": "valid=false\nERROR RULE_FAILED mode notNull"
+  },
+  {
+    "id": "case/any field/not allowed",
+    "findings": "valid=false\nERROR RULE_FAILED mode enum"
+  },
+  {
+    "id": "case/any field/wrong type is still type-checked by enum",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/warn-only rule/valid",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/warn-only rule/warned",
+    "findings": "valid=true\nWARNING RULE_FAILED name maxLength"
+  },
+  {
+    "id": "case/warn-only rule/missing still errors",
+    "findings": "valid=false\nERROR RULE_FAILED name notNull"
+  },
+  {
+    "id": "case/ordering: declaration then rule then list index/several failures",
+    "findings": "valid=false\nERROR RULE_FAILED b greaterThan\nERROR RULE_FAILED b greaterThan\nERROR RULE_FAILED a minLength"
+  },
+  {
+    "id": "case/ordering: list element order/several failures",
+    "findings": "valid=false\nERROR RULE_FAILED ports.0 greaterThan\nERROR RULE_FAILED ports.1 greaterThan\nERROR RULE_FAILED ports.2 greaterThan"
+  },
+  {
+    "id": "case/escaped key containing a dot/literal key passes",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/escaped key containing a dot/literal key fails, with the escape preserved in the path",
+    "findings": "valid=false\nERROR RULE_FAILED a\\.b minLength"
+  },
+  {
+    "id": "case/escaped key containing a dot/nested key is a different path",
+    "findings": "valid=false\nERROR RULE_FAILED a\\.b notNull"
+  },
+  {
+    "id": "case/escaped key containing a dot/absent",
+    "findings": "valid=false\nERROR RULE_FAILED a\\.b notNull"
+  },
+  {
+    "id": "case/boolean field/false passes",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/boolean field/true fails",
+    "findings": "valid=false\nERROR RULE_FAILED debug isFalse"
+  },
+  {
+    "id": "case/boolean field/wrong type",
+    "findings": "valid=false\nERROR TYPE_MISMATCH debug -"
+  },
+  {
+    "id": "case/boolean field/missing",
+    "findings": "valid=false\nERROR RULE_FAILED debug notNull"
+  },
+  {
+    "id": "case/ordering: element indices compare as numbers/eleven failures, numeric order",
+    "findings": "valid=false\nERROR RULE_FAILED ports.0 greaterThan\nERROR RULE_FAILED ports.1 greaterThan\nERROR RULE_FAILED ports.2 greaterThan\nERROR RULE_FAILED ports.3 greaterThan\nERROR RULE_FAILED ports.4 greaterThan\nERROR RULE_FAILED ports.5 greaterThan\nERROR RULE_FAILED ports.6 greaterThan\nERROR RULE_FAILED ports.7 greaterThan\nERROR RULE_FAILED ports.8 greaterThan\nERROR RULE_FAILED ports.9 greaterThan\nERROR RULE_FAILED ports.10 greaterThan"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/zero",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/empty string",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/false",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/empty list",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/empty object",
+    "findings": "valid=true"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/null fails",
+    "findings": "valid=false\nERROR RULE_FAILED v notNull"
+  },
+  {
+    "id": "case/notNull alone accepts every present value/missing fails",
+    "findings": "valid=false\nERROR RULE_FAILED v notNull"
+  },
+  {
+    "id": "case/mismatched declared type names no rule/string value",
+    "findings": "valid=false\nERROR TYPE_MISMATCH port -"
+  },
+  {
+    "id": "case/mismatched declared type names no rule/boolean value",
+    "findings": "valid=false\nERROR TYPE_MISMATCH port -"
+  },
+  {
+    "id": "case/mismatched declared type names no rule/list value",
+    "findings": "valid=false\nERROR TYPE_MISMATCH port -"
+  },
+  {
+    "id": "case/mismatched declared type names no rule/object value",
+    "findings": "valid=false\nERROR TYPE_MISMATCH port -"
+  },
+  {
+    "id": "strictCase/uncovered key/only covered",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/uncovered key/one extra",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD extra -"
+  },
+  {
+    "id": "strictCase/uncovered key/sorted keys",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD a -\nERROR UNKNOWN_FIELD m -\nERROR UNKNOWN_FIELD z -"
+  },
+  {
+    "id": "strictCase/container key is covered/exact",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/container key is covered/sibling unknown",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD server.host -"
+  },
+  {
+    "id": "strictCase/container key is covered/missing container",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/wildcard covers element subtrees/covered",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/wildcard covers element subtrees/extra element key",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD servers.0.port -"
+  },
+  {
+    "id": "strictCase/wildcard covers element subtrees/two elements",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD servers.1.port -"
+  },
+  {
+    "id": "strictCase/wildcard covers element subtrees/empty list",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/an escaped key is one key in strict mode/covered",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/an escaped key is one key in strict mode/a sibling dotted key is unknown, escaped in the path",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD a\\.c -"
+  },
+  {
+    "id": "strictCase/an ANY field covers its subtree/free-form body",
+    "findings": "valid=true"
+  },
+  {
+    "id": "strictCase/an ANY field covers its subtree/sibling of the ANY field",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD answers.0.reply -"
+  },
+  {
+    "id": "strictCase/an ANY field covers its subtree/a LIST field does not",
+    "findings": "valid=false\nERROR UNKNOWN_FIELD meta.0.x -"
+  }
+]

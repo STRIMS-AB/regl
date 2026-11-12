@@ -1,0 +1,32 @@
+{
+  "name": "@regl/core",
+  "version": "0.1.0",
+  "description": "Validation rules for TypeScript and JavaScript, sharing a specification with regl-java",
+  "license": "Apache-2.0",
+  "homepage": "https://regl.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/STRIMS-AB/regl.git",
+    "directory": "regl-ts"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "prepack": "npm run build",
+    "test": "tsc -p tsconfig.test.json && node build/test/test/conformance.js && node build/test/test/document-conformance.js && node build/test/test/rule-validate.js && node build/test/test/sidecar.js",
+    "golden": "tsc -p tsconfig.test.json && node build/test/test/generate-document-golden.js",
+    "clean": "rm -rf dist build"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.3",
+    "typescript": "^5.0.0"
+  },
+  "author": "STRIMS AB <dev@strims.com> (https://strims.se)"
+}

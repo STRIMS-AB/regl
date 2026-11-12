@@ -1,0 +1,260 @@
+[
+  {
+    "id": "minLength",
+    "name": "Minimum Length",
+    "description": "Requires text to be at least {value} characters.",
+    "targetType": "STRING",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "maxLength",
+    "name": "Maximum Length",
+    "description": "Requires text to be no longer than {value} characters.",
+    "targetType": "STRING",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "length",
+    "name": "Exact Length",
+    "description": "Requires text to be exactly {value} characters.",
+    "targetType": "STRING",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "pattern",
+    "name": "Regex Pattern",
+    "description": "Requires text to match the regular expression: {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "contains",
+    "name": "Contains Text",
+    "description": "Requires text to contain the substring: {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "startsWith",
+    "name": "Starts With",
+    "description": "Requires text to start with: {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "endsWith",
+    "name": "Ends With",
+    "description": "Requires text to end with: {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "email",
+    "name": "Email Address",
+    "description": "Requires a valid email address format.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "url",
+    "name": "URL",
+    "description": "Requires a valid HTTP or HTTPS URL.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "uuid",
+    "name": "UUID",
+    "description": "Requires a valid UUID format.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "languageCode",
+    "name": "Language Code",
+    "description": "Requires a well-formed BCP-47 language tag.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "lowercase",
+    "name": "Lowercase",
+    "description": "Requires all characters to be lowercase.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "uppercase",
+    "name": "Uppercase",
+    "description": "Requires all characters to be uppercase.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "trimmed",
+    "name": "Trimmed",
+    "description": "Requires no leading or trailing whitespace.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "notEmpty",
+    "name": "Not Empty",
+    "description": "Requires text to contain at least one non-whitespace character.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "text",
+    "name": "Human-Readable Text",
+    "description": "Marks a field as human-readable text.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "dateFormat",
+    "name": "Date Format",
+    "description": "Requires date/time string to match format pattern: {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "isoDate",
+    "name": "ISO Date",
+    "description": "Requires a valid ISO-8601 calendar date (YYYY-MM-DD).",
+    "targetType": "STRING"
+  },
+  {
+    "id": "isoDateTime",
+    "name": "ISO Date-Time",
+    "description": "Requires a valid ISO-8601 date-time timestamp.",
+    "targetType": "STRING"
+  },
+  {
+    "id": "isoTime",
+    "name": "ISO Time",
+    "description": "Requires a valid ISO-8601 time (HH:mm:ss).",
+    "targetType": "STRING"
+  },
+  {
+    "id": "notNull",
+    "name": "Not Null",
+    "description": "Requires the value to be present and not null.",
+    "targetType": "ANY"
+  },
+  {
+    "id": "enum",
+    "name": "Allowed Values",
+    "description": "Restricts the value to a predefined list of allowed strings: {value}.",
+    "targetType": "ANY",
+    "parameterType": "LIST"
+  },
+  {
+    "id": "after",
+    "name": "After Date",
+    "description": "Requires date/time to be chronologically after {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "before",
+    "name": "Before Date",
+    "description": "Requires date/time to be chronologically before {value}.",
+    "targetType": "STRING",
+    "parameterType": "STRING"
+  },
+  {
+    "id": "greaterThan",
+    "name": "Greater Than",
+    "description": "Requires the number to be strictly greater than {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "greaterThanOrEqual",
+    "name": "Greater Than or Equal",
+    "description": "Requires the number to be greater than or equal to {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "lessThan",
+    "name": "Less Than",
+    "description": "Requires the number to be strictly less than {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "lessThanOrEqual",
+    "name": "Less Than or Equal",
+    "description": "Requires the number to be less than or equal to {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "positive",
+    "name": "Positive Number",
+    "description": "Requires a number strictly greater than zero.",
+    "targetType": "NUMBER"
+  },
+  {
+    "id": "negative",
+    "name": "Negative Number",
+    "description": "Requires a number strictly less than zero.",
+    "targetType": "NUMBER"
+  },
+  {
+    "id": "positiveInteger",
+    "name": "Positive Integer",
+    "description": "Requires a whole number strictly greater than zero.",
+    "targetType": "NUMBER"
+  },
+  {
+    "id": "negativeInteger",
+    "name": "Negative Integer",
+    "description": "Requires a whole number strictly less than zero.",
+    "targetType": "NUMBER"
+  },
+  {
+    "id": "multipleOf",
+    "name": "Multiple Of",
+    "description": "Requires the number to be a multiple of {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "precision",
+    "name": "Decimal Precision",
+    "description": "Restricts the maximum number of decimal places to {value}.",
+    "targetType": "NUMBER",
+    "parameterType": "NUMBER"
+  },
+  {
+    "id": "epoch",
+    "name": "Epoch Seconds",
+    "description": "Requires a whole-number Unix timestamp in seconds.",
+    "targetType": "DATETIME"
+  },
+  {
+    "id": "epochMillis",
+    "name": "Epoch Milliseconds",
+    "description": "Requires a whole-number Unix timestamp in milliseconds.",
+    "targetType": "DATETIME"
+  },
+  {
+    "id": "range",
+    "name": "List Size Range",
+    "description": "Restricts the number of items in a list to the range {value}.",
+    "targetType": "LIST",
+    "parameterType": "OBJECT"
+  },
+  {
+    "id": "unique",
+    "name": "Unique Items",
+    "description": "Requires all items in the list to be distinct.",
+    "targetType": "LIST"
+  },
+  {
+    "id": "isTrue",
+    "name": "Is True",
+    "description": "Requires a boolean value to be true.",
+    "targetType": "BOOLEAN"
+  },
+  {
+    "id": "isFalse",
+    "name": "Is False",
+    "description": "Requires a boolean value to be false.",
+    "targetType": "BOOLEAN"
+  }
+]

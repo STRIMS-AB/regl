@@ -1,0 +1,204 @@
+{
+  "rules": {
+    "minLength": {
+      "name": "Longueur minimale",
+      "description": "Exige que le texte comporte au moins {value} caractères.",
+      "error": "Le champ '{field}' doit contenir au moins {value} caractères."
+    },
+    "maxLength": {
+      "name": "Longueur maximale",
+      "description": "Exige que le texte ne dépasse pas {value} caractères.",
+      "error": "Le champ '{field}' ne doit pas dépasser {value} caractères."
+    },
+    "length": {
+      "name": "Longueur exacte",
+      "description": "Exige que le texte comporte exactement {value} caractères.",
+      "error": "Le champ '{field}' doit contenir exactement {value} caractères."
+    },
+    "pattern": {
+      "name": "Motif d'expression régulière",
+      "description": "Exige que le texte corresponde au motif d'expression régulière : {value}.",
+      "error": "Le champ '{field}' doit correspondre au motif : {value}"
+    },
+    "contains": {
+      "name": "Contient du texte",
+      "description": "Exige que le texte contienne la sous-chaîne : {value}.",
+      "error": "Le champ '{field}' doit contenir : {value}"
+    },
+    "startsWith": {
+      "name": "Commence par",
+      "description": "Exige que le texte commence par : {value}.",
+      "error": "Le champ '{field}' doit commencer par : {value}"
+    },
+    "endsWith": {
+      "name": "Se termine par",
+      "description": "Exige que le texte se termine par : {value}.",
+      "error": "Le champ '{field}' doit se terminer par : {value}"
+    },
+    "email": {
+      "name": "Adresse e-mail",
+      "description": "Exige un format d'adresse e-mail valide.",
+      "error": "Le champ '{field}' doit être une adresse e-mail valide."
+    },
+    "url": {
+      "name": "URL",
+      "description": "Exige une URL HTTP ou HTTPS valide.",
+      "error": "Le champ '{field}' doit être une URL valide."
+    },
+    "uuid": {
+      "name": "UUID",
+      "description": "Exige un format UUID valide.",
+      "error": "Le champ '{field}' doit être un UUID valide."
+    },
+    "languageCode": {
+      "name": "Code de langue",
+      "description": "Exige une étiquette de langue BCP-47 correctement formée.",
+      "error": "Le champ '{field}' doit être un code de langue valide."
+    },
+    "lowercase": {
+      "name": "Minuscules",
+      "description": "Exige que tous les caractères soient en minuscules.",
+      "error": "Le champ '{field}' doit être en minuscules."
+    },
+    "uppercase": {
+      "name": "Majuscules",
+      "description": "Exige que tous les caractères soient en majuscules.",
+      "error": "Le champ '{field}' doit être en majuscules."
+    },
+    "trimmed": {
+      "name": "Sans espaces",
+      "description": "Exige qu'il n'y ait pas d'espace au début ni à la fin.",
+      "error": "Le champ '{field}' ne doit pas comporter d'espace au début ni à la fin."
+    },
+    "notEmpty": {
+      "name": "Non vide",
+      "description": "Exige que le texte contienne au moins un caractère autre qu'un espace.",
+      "error": "Le champ '{field}' ne doit pas être vide."
+    },
+    "text": {
+      "name": "Texte lisible",
+      "description": "Marque le champ comme du texte destiné à être lu par des humains.",
+      "error": "Le champ '{field}' n'est pas un texte valide."
+    },
+    "notNull": {
+      "name": "Non nul",
+      "description": "Exige que la valeur soit présente et non nulle.",
+      "error": "Le champ '{field}' est obligatoire et ne doit pas être nul."
+    },
+    "enum": {
+      "name": "Valeurs autorisées",
+      "description": "Restreint la valeur à une liste prédéfinie de chaînes autorisées : {value}.",
+      "error": "La valeur '{value}' du champ '{field}' ne figure pas parmi les valeurs autorisées : {value}."
+    },
+    "greaterThan": {
+      "name": "Supérieur à",
+      "description": "Exige que le nombre soit strictement supérieur à {value}.",
+      "error": "Le champ '{field}' doit être strictement supérieur à {value}."
+    },
+    "greaterThanOrEqual": {
+      "name": "Supérieur ou égal à",
+      "description": "Exige que le nombre soit supérieur ou égal à {value}.",
+      "error": "Le champ '{field}' doit être supérieur ou égal à {value}."
+    },
+    "lessThan": {
+      "name": "Inférieur à",
+      "description": "Exige que le nombre soit strictement inférieur à {value}.",
+      "error": "Le champ '{field}' doit être strictement inférieur à {value}."
+    },
+    "lessThanOrEqual": {
+      "name": "Inférieur ou égal à",
+      "description": "Exige que le nombre soit inférieur ou égal à {value}.",
+      "error": "Le champ '{field}' doit être inférieur ou égal à {value}."
+    },
+    "positive": {
+      "name": "Nombre positif",
+      "description": "Exige un nombre strictement supérieur à zéro.",
+      "error": "Le champ '{field}' doit être positif."
+    },
+    "negative": {
+      "name": "Nombre négatif",
+      "description": "Exige un nombre strictement inférieur à zéro.",
+      "error": "Le champ '{field}' doit être négatif."
+    },
+    "positiveInteger": {
+      "name": "Entier positif",
+      "description": "Exige un nombre entier strictement supérieur à zéro.",
+      "error": "Le champ '{field}' doit être un entier positif."
+    },
+    "negativeInteger": {
+      "name": "Entier négatif",
+      "description": "Exige un nombre entier strictement inférieur à zéro.",
+      "error": "Le champ '{field}' doit être un entier négatif."
+    },
+    "multipleOf": {
+      "name": "Multiple de",
+      "description": "Exige que le nombre soit un multiple de {value}.",
+      "error": "Le champ '{field}' doit être un multiple de {value}."
+    },
+    "precision": {
+      "name": "Précision décimale",
+      "description": "Limite le nombre à {value} décimales au maximum.",
+      "error": "Le champ '{field}' ne peut pas comporter plus de {value} décimales."
+    },
+    "range": {
+      "name": "Plage de taille",
+      "description": "Restreint le nombre d'éléments d'une liste à la plage {value}.",
+      "error": "La taille du champ '{field}' doit se situer dans la plage {value}."
+    },
+    "unique": {
+      "name": "Éléments uniques",
+      "description": "Exige que tous les éléments de la liste soient distincts.",
+      "error": "Le champ '{field}' doit contenir des éléments uniques."
+    },
+    "isTrue": {
+      "name": "Est vrai",
+      "description": "Exige qu'une valeur booléenne soit vraie.",
+      "error": "Le champ '{field}' doit être vrai."
+    },
+    "isFalse": {
+      "name": "Est faux",
+      "description": "Exige qu'une valeur booléenne soit fausse.",
+      "error": "Le champ '{field}' doit être faux."
+    },
+    "dateFormat": {
+      "name": "Format de date",
+      "description": "Exige une chaîne de date/heure correspondant au motif de format : {value}.",
+      "error": "Le champ '{field}' doit correspondre au format de date : {value}"
+    },
+    "isoDate": {
+      "name": "Date ISO",
+      "description": "Exige une date du calendrier valide au format ISO 8601 (YYYY-MM-DD).",
+      "error": "Le champ '{field}' doit être une date ISO 8601 valide (YYYY-MM-DD)."
+    },
+    "isoDateTime": {
+      "name": "Date et heure ISO",
+      "description": "Exige un horodatage de date et heure valide au format ISO 8601.",
+      "error": "Le champ '{field}' doit être un horodatage de date et heure ISO 8601 valide."
+    },
+    "isoTime": {
+      "name": "Heure ISO",
+      "description": "Exige une heure valide au format ISO 8601 (HH:mm:ss).",
+      "error": "Le champ '{field}' doit être une heure ISO 8601 valide (HH:mm:ss)."
+    },
+    "epoch": {
+      "name": "Epoch en secondes",
+      "description": "Exige un horodatage Unix entier en secondes.",
+      "error": "Le champ '{field}' doit être un horodatage Unix entier valide en secondes."
+    },
+    "epochMillis": {
+      "name": "Epoch en millisecondes",
+      "description": "Exige un horodatage Unix entier en millisecondes.",
+      "error": "Le champ '{field}' doit être un horodatage Unix entier valide en millisecondes."
+    },
+    "after": {
+      "name": "Après le",
+      "description": "Exige une date/heure chronologiquement postérieure à {value}.",
+      "error": "Le champ '{field}' doit être chronologiquement postérieur à {value}."
+    },
+    "before": {
+      "name": "Avant le",
+      "description": "Exige une date/heure chronologiquement antérieure à {value}.",
+      "error": "Le champ '{field}' doit être chronologiquement antérieur à {value}."
+    }
+  }
+}

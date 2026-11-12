@@ -1,0 +1,45 @@
+name: Publish to Maven Central
+
+# A tag v1.2.3 publishes dev.regl:regl-java, then dev.regl:regl-cli, which depends on it.
+# The version is the one in each pom.xml; the tag only starts the run.
+#
+# Secrets: CENTRAL_TOKEN_USER and CENTRAL_TOKEN_PASSWORD (a user token of the Central
+# Portal, where the namespace dev.regl is verified), MAVEN_GPG_PRIVATE_KEY and
+# MAVEN_GPG_PASSPHRASE (the key the artifacts are signed with).
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          server-id: central
+          server-username: CENTRAL_TOKEN_USER
+          server-password: CENTRAL_TOKEN_PASSWORD
+          gpg-private-key: ${{ secrets.MAVEN_GPG_PRIVATE_KEY }}
+          gpg-passphrase: MAVEN_GPG_PASSPHRASE
+
+      - name: Publish regl-java
+        working-directory: regl-java
+        run: mvn -B -Prelease -DskipTests clean deploy
+        env:
+          CENTRAL_TOKEN_USER: ${{ secrets.CENTRAL_TOKEN_USER }}
+          CENTRAL_TOKEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
+
+      - name: Publish regl-cli
+        working-directory: regl-cli
+        run: mvn -B -Prelease -DskipTests clean deploy
+        env:
+          CENTRAL_TOKEN_USER: ${{ secrets.CENTRAL_TOKEN_USER }}
+          CENTRAL_TOKEN_PASSWORD: ${{ secrets.CENTRAL_TOKEN_PASSWORD }}
+          MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}

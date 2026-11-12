@@ -1,0 +1,178 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Any push to main publishes artifacts.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  regl-java:
+    name: regl-java (JDK 17 + 21)
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        java: ['17', '21']
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: ${{ matrix.java }}
+          cache: maven
+
+      # The `ci` profile makes RuleTypeGeneratedTest fail on staleness instead
+      # of regenerating the file, so a build cannot pass on a repository whose
+      # committed catalog and committed RuleType.java disagree.
+      - name: Verify against the catalog
+        run: mvn -B -Pci verify
+        working-directory: regl-java
+
+      - name: Confirm the build did not modify the working tree
+        run: git diff --exit-code
+
+  regl-ts:
+    name: regl-ts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: regl-ts/package-lock.json
+
+      - name: Install
+        working-directory: regl-ts
+        run: npm ci
+
+      - name: Build and test against the catalog
+        working-directory: regl-ts
+        run: npm test
+
+  catalog:
+    name: catalog (source of truth)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Both engines read catalog.json and the shared conformance fixtures from
+      # regl-spec/. A malformed or empty catalog would otherwise surface only as
+      # a confusing failure inside one engine's suite.
+      - name: Catalog is well-formed and non-empty
+        run: |
+          node -e '
+            const fs = require("fs");
+            const spec = "regl-spec";
+
+            const catalog = JSON.parse(fs.readFileSync(`${spec}/catalog.json`, "utf8"));
+            if (!Array.isArray(catalog) || catalog.length === 0) {
+              throw new Error("catalog.json must be a non-empty array of rules");
+            }
+
+            const ids = new Set();
+            const required = ["id", "name", "description", "targetType"];
+            // the target types of the engines (TargetType): keep in step with them
+            const targets = new Set(["STRING", "NUMBER", "INTEGER", "BOOLEAN", "LIST", "ANY", "DATE", "DATETIME", "TIME"]);
+            const params = new Set(["STRING", "NUMBER", "BOOLEAN", "LIST", "OBJECT"]);
+
+            for (const rule of catalog) {
+              for (const field of required) {
+                if (typeof rule[field] !== "string" || !rule[field]) {
+                  throw new Error(`rule ${JSON.stringify(rule.id)} is missing ${field}`);
+                }
+              }
+              if (ids.has(rule.id)) throw new Error(`duplicate rule id: ${rule.id}`);
+              ids.add(rule.id);
+              if (!targets.has(rule.targetType)) {
+                throw new Error(`rule ${rule.id} has unknown targetType: ${rule.targetType}`);
+              }
+              if (rule.parameterType !== undefined && !params.has(rule.parameterType)) {
+                throw new Error(`rule ${rule.id} has unknown parameterType: ${rule.parameterType}`);
+              }
+            }
+
+            const en = JSON.parse(fs.readFileSync(`${spec}/i18n/en.json`, "utf8"));
+            for (const id of ids) {
+              if (!en.rules?.[id]) throw new Error(`i18n/en.json is missing rule: ${id}`);
+            }
+
+            const cases = JSON.parse(fs.readFileSync(`${spec}/conformance/cases.json`, "utf8"));
+            if (!Array.isArray(cases.cases) || cases.cases.length === 0) {
+              throw new Error("conformance/cases.json must declare a non-empty cases array");
+            }
+            for (const c of cases.cases) {
+              if (typeof c.expected !== "boolean") {
+                throw new Error(`conformance case for ${c.rule} has no boolean "expected"`);
+              }
+              if (!ids.has(c.rule)) {
+                throw new Error(`conformance case references unknown rule: ${c.rule}`);
+              }
+            }
+
+            console.log(`ok  ${ids.size} rules, ${cases.cases.length} conformance cases`);
+          '
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # The README rules table is generated from the catalog; fail if it drifted.
+      - name: README rules table matches the catalog
+        run: node scripts/sync-readme.mjs --check
+
+  package:
+    name: package
+    needs: [regl-java, regl-ts, catalog]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: regl-ts/package-lock.json
+
+      - name: Verify before publishing
+        run: mvn -B -Pci verify
+        working-directory: regl-java
+
+      - name: Build and test the npm package
+        run: |
+          npm ci
+          npm test
+          npm publish --dry-run
+        working-directory: regl-ts
+
+      # A dry run of what a release packages: publishing itself is publish.yml,
+      # started by a tag.
+      - name: Package the Java artifact
+        run: mvn -B -Pci -Prelease -Dgpg.skip=true package
+        working-directory: regl-java
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: regl-java
+          path: regl-java/target/*.jar
+          if-no-files-found: error

@@ -1,0 +1,1083 @@
+{
+  "cases": [
+    {
+      "name": "valid single field",
+      "fields": [
+        {
+          "path": "name",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "minLength",
+              "value": 3
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "valid",
+          "doc": {
+            "name": "abc"
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        },
+        {
+          "name": "null",
+          "doc": {
+            "name": null
+          }
+        },
+        {
+          "name": "too short",
+          "doc": {
+            "name": "ab"
+          }
+        },
+        {
+          "name": "wrong type",
+          "doc": {
+            "name": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "nested path",
+      "fields": [
+        {
+          "path": "server.port",
+          "type": "INTEGER",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "greaterThan",
+              "value": 1024
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "valid",
+          "doc": {
+            "server": {
+              "port": 8080
+            }
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        },
+        {
+          "name": "null ancestor",
+          "doc": {
+            "server": null
+          }
+        },
+        {
+          "name": "scalar ancestor",
+          "doc": {
+            "server": "nope"
+          }
+        },
+        {
+          "name": "list ancestor",
+          "doc": {
+            "server": [
+              1
+            ]
+          }
+        },
+        {
+          "name": "below bound",
+          "doc": {
+            "server": {
+              "port": 80
+            }
+          }
+        },
+        {
+          "name": "wrong leaf type",
+          "doc": {
+            "server": {
+              "port": "8080"
+            }
+          }
+        },
+        {
+          "name": "fractional leaf",
+          "doc": {
+            "server": {
+              "port": 80.5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "null short-circuits the chain",
+      "fields": [
+        {
+          "path": "port",
+          "type": "INTEGER",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "valid",
+          "doc": {
+            "port": 5
+          }
+        },
+        {
+          "name": "null",
+          "doc": {
+            "port": null
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "optional field",
+      "fields": [
+        {
+          "path": "nickname",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "minLength",
+              "value": 2
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "absent is accepted",
+          "doc": {}
+        },
+        {
+          "name": "null is accepted",
+          "doc": {
+            "nickname": null
+          }
+        },
+        {
+          "name": "valid",
+          "doc": {
+            "nickname": "ab"
+          }
+        }
+      ]
+    },
+    {
+      "name": "wildcard over a list",
+      "fields": [
+        {
+          "path": "servers.*.port",
+          "type": "NUMBER",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "greaterThan",
+              "value": 1024
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "all valid",
+          "doc": {
+            "servers": [
+              {
+                "port": 8080
+              },
+              {
+                "port": 9090
+              }
+            ]
+          }
+        },
+        {
+          "name": "missing list yields nothing",
+          "doc": {}
+        },
+        {
+          "name": "null list yields nothing",
+          "doc": {
+            "servers": null
+          }
+        },
+        {
+          "name": "empty list",
+          "doc": {
+            "servers": []
+          }
+        },
+        {
+          "name": "not a list",
+          "doc": {
+            "servers": {
+              "a": {}
+            }
+          }
+        },
+        {
+          "name": "element below bound",
+          "doc": {
+            "servers": [
+              {
+                "port": 80
+              },
+              {
+                "port": 9999
+              }
+            ]
+          }
+        },
+        {
+          "name": "element null",
+          "doc": {
+            "servers": [
+              {
+                "port": null
+              }
+            ]
+          }
+        },
+        {
+          "name": "elements are scalars",
+          "doc": {
+            "servers": [
+              1,
+              2
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "list field and its elements",
+      "fields": [
+        {
+          "path": "tags",
+          "type": "LIST",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "unique"
+            },
+            {
+              "code": "range",
+              "value": {
+                "min": 1,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "path": "tags.*",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "notEmpty"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "valid",
+          "doc": {
+            "tags": [
+              "x",
+              "y"
+            ]
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        },
+        {
+          "name": "empty list",
+          "doc": {
+            "tags": []
+          }
+        },
+        {
+          "name": "duplicate items",
+          "doc": {
+            "tags": [
+              "x",
+              "x"
+            ]
+          }
+        },
+        {
+          "name": "empty element",
+          "doc": {
+            "tags": [
+              "ok",
+              ""
+            ]
+          }
+        },
+        {
+          "name": "null element",
+          "doc": {
+            "tags": [
+              null
+            ]
+          }
+        },
+        {
+          "name": "wrong element type",
+          "doc": {
+            "tags": [
+              "ok",
+              7
+            ]
+          }
+        },
+        {
+          "name": "list is not a list",
+          "doc": {
+            "tags": "nope"
+          }
+        }
+      ]
+    },
+    {
+      "name": "any field",
+      "fields": [
+        {
+          "path": "mode",
+          "type": "ANY",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "enum",
+              "value": [
+                "fast",
+                "safe"
+              ]
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "allowed",
+          "doc": {
+            "mode": "fast"
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        },
+        {
+          "name": "not allowed",
+          "doc": {
+            "mode": "turbo"
+          }
+        },
+        {
+          "name": "wrong type is still type-checked by enum",
+          "doc": {
+            "mode": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "warn-only rule",
+      "fields": [
+        {
+          "path": "name",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "maxLength",
+              "value": 3,
+              "severity": "warn"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "valid",
+          "doc": {
+            "name": "ab"
+          }
+        },
+        {
+          "name": "warned",
+          "doc": {
+            "name": "alexandra"
+          }
+        },
+        {
+          "name": "missing still errors",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "ordering: declaration then rule then list index",
+      "fields": [
+        {
+          "path": "b",
+          "type": "NUMBER",
+          "rules": [
+            {
+              "code": "greaterThan",
+              "value": 100
+            },
+            {
+              "code": "greaterThan",
+              "value": 200
+            }
+          ]
+        },
+        {
+          "path": "a",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "minLength",
+              "value": 5
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "several failures",
+          "doc": {
+            "a": "x",
+            "b": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "ordering: list element order",
+      "fields": [
+        {
+          "path": "ports.*",
+          "type": "NUMBER",
+          "rules": [
+            {
+              "code": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "several failures",
+          "doc": {
+            "ports": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "escaped key containing a dot",
+      "fields": [
+        {
+          "path": "a\\.b",
+          "type": "STRING",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "minLength",
+              "value": 3
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "literal key passes",
+          "doc": {
+            "a.b": "xyz"
+          }
+        },
+        {
+          "name": "literal key fails, with the escape preserved in the path",
+          "doc": {
+            "a.b": "x"
+          }
+        },
+        {
+          "name": "nested key is a different path",
+          "doc": {
+            "a": {
+              "b": "xyz"
+            }
+          }
+        },
+        {
+          "name": "absent",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "boolean field",
+      "fields": [
+        {
+          "path": "debug",
+          "type": "BOOLEAN",
+          "rules": [
+            {
+              "code": "notNull"
+            },
+            {
+              "code": "isFalse"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "false passes",
+          "doc": {
+            "debug": false
+          }
+        },
+        {
+          "name": "true fails",
+          "doc": {
+            "debug": true
+          }
+        },
+        {
+          "name": "wrong type",
+          "doc": {
+            "debug": "yes"
+          }
+        },
+        {
+          "name": "missing",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "ordering: element indices compare as numbers",
+      "fields": [
+        {
+          "path": "ports.*",
+          "type": "NUMBER",
+          "rules": [
+            {
+              "code": "greaterThan",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "eleven failures, numeric order",
+          "doc": {
+            "ports": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "notNull alone accepts every present value",
+      "fields": [
+        {
+          "path": "v",
+          "type": "ANY",
+          "rules": [
+            {
+              "code": "notNull"
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "zero",
+          "doc": {
+            "v": 0
+          }
+        },
+        {
+          "name": "empty string",
+          "doc": {
+            "v": ""
+          }
+        },
+        {
+          "name": "false",
+          "doc": {
+            "v": false
+          }
+        },
+        {
+          "name": "empty list",
+          "doc": {
+            "v": []
+          }
+        },
+        {
+          "name": "empty object",
+          "doc": {
+            "v": {}
+          }
+        },
+        {
+          "name": "null fails",
+          "doc": {
+            "v": null
+          }
+        },
+        {
+          "name": "missing fails",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "mismatched declared type names no rule",
+      "fields": [
+        {
+          "path": "port",
+          "type": "NUMBER",
+          "rules": [
+            {
+              "code": "greaterThan",
+              "value": 0
+            },
+            {
+              "code": "lessThan",
+              "value": 100
+            }
+          ]
+        }
+      ],
+      "documents": [
+        {
+          "name": "string value",
+          "doc": {
+            "port": "8080"
+          }
+        },
+        {
+          "name": "boolean value",
+          "doc": {
+            "port": true
+          }
+        },
+        {
+          "name": "list value",
+          "doc": {
+            "port": []
+          }
+        },
+        {
+          "name": "object value",
+          "doc": {
+            "port": {}
+          }
+        }
+      ]
+    }
+  ],
+  "strictCases": [
+    {
+      "name": "uncovered key",
+      "fields": [
+        {
+          "path": "name",
+          "type": "STRING",
+          "rules": []
+        }
+      ],
+      "documents": [
+        {
+          "name": "only covered",
+          "doc": {
+            "name": "abc"
+          }
+        },
+        {
+          "name": "one extra",
+          "doc": {
+            "name": "abc",
+            "extra": 1
+          }
+        },
+        {
+          "name": "sorted keys",
+          "doc": {
+            "z": 1,
+            "a": 2,
+            "m": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "container key is covered",
+      "fields": [
+        {
+          "path": "server.port",
+          "type": "NUMBER",
+          "rules": []
+        }
+      ],
+      "documents": [
+        {
+          "name": "exact",
+          "doc": {
+            "server": {
+              "port": 1
+            }
+          }
+        },
+        {
+          "name": "sibling unknown",
+          "doc": {
+            "server": {
+              "port": 1,
+              "host": "h"
+            }
+          }
+        },
+        {
+          "name": "missing container",
+          "doc": {}
+        }
+      ]
+    },
+    {
+      "name": "wildcard covers element subtrees",
+      "fields": [
+        {
+          "path": "servers.*.host",
+          "type": "STRING",
+          "rules": []
+        }
+      ],
+      "documents": [
+        {
+          "name": "covered",
+          "doc": {
+            "servers": [
+              {
+                "host": "h"
+              }
+            ]
+          }
+        },
+        {
+          "name": "extra element key",
+          "doc": {
+            "servers": [
+              {
+                "host": "h",
+                "port": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "two elements",
+          "doc": {
+            "servers": [
+              {
+                "host": "a"
+              },
+              {
+                "host": "b",
+                "port": 2
+              }
+            ]
+          }
+        },
+        {
+          "name": "empty list",
+          "doc": {
+            "servers": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "an escaped key is one key in strict mode",
+      "fields": [
+        {
+          "path": "a\\.b",
+          "type": "STRING",
+          "rules": []
+        }
+      ],
+      "documents": [
+        {
+          "name": "covered",
+          "doc": {
+            "a.b": "x"
+          }
+        },
+        {
+          "name": "a sibling dotted key is unknown, escaped in the path",
+          "doc": {
+            "a.b": "x",
+            "a.c": "y"
+          }
+        }
+      ]
+    },
+    {
+      "name": "an ANY field covers its subtree",
+      "fields": [
+        {
+          "path": "answers.*.when",
+          "type": "STRING",
+          "rules": []
+        },
+        {
+          "path": "answers.*.body",
+          "type": "ANY",
+          "rules": []
+        },
+        {
+          "path": "meta",
+          "type": "LIST",
+          "rules": []
+        }
+      ],
+      "documents": [
+        {
+          "name": "free-form body",
+          "doc": {
+            "answers": [
+              {
+                "when": "GET /a",
+                "body": {
+                  "id": "x",
+                  "items": [
+                    {
+                      "sku": "s1"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "sibling of the ANY field",
+          "doc": {
+            "answers": [
+              {
+                "when": "GET /a",
+                "body": "text",
+                "reply": 1
+              }
+            ]
+          }
+        },
+        {
+          "name": "a LIST field does not",
+          "doc": {
+            "meta": [
+              {
+                "x": 1
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "constructionErrors": [
+    {
+      "name": "duplicate exact path",
+      "fields": [
+        {
+          "path": "port",
+          "type": "NUMBER",
+          "rules": []
+        },
+        {
+          "path": "port",
+          "type": "NUMBER",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "name": "wildcard overlaps an index literal",
+      "fields": [
+        {
+          "path": "servers.*.port",
+          "type": "NUMBER",
+          "rules": []
+        },
+        {
+          "path": "servers.0.port",
+          "type": "NUMBER",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "name": "empty path",
+      "fields": [
+        {
+          "path": "",
+          "type": "STRING",
+          "rules": []
+        }
+      ]
+    },
+    {
+      "name": "dangling escape",
+      "fields": [
+        {
+          "path": "a\\",
+          "type": "STRING",
+          "rules": []
+        }
+      ]
+    }
+  ],
+  "acceptedPathPairs": [
+    {
+      "name": "different lengths",
+      "paths": [
+        "servers.*",
+        "servers.*.port"
+      ]
+    },
+    {
+      "name": "wildcard and a non-index literal",
+      "paths": [
+        "servers.*.port",
+        "servers.primary.port"
+      ]
+    },
+    {
+      "name": "siblings",
+      "paths": [
+        "server.port",
+        "server.host"
+      ]
+    },
+    {
+      "name": "an escaped dot is one key, not two",
+      "paths": [
+        "a\\.b",
+        "a.b"
+      ]
+    }
+  ],
+  "formalErrors": [
+    {
+      "name": "rule targets another type",
+      "type": "STRING",
+      "rules": [
+        {
+          "code": "greaterThan",
+          "value": 0
+        }
+      ]
+    }
+  ],
+  "formalAccepted": [
+    {
+      "name": "notNull is allowed on any declared type",
+      "type": "STRING",
+      "rules": [
+        {
+          "code": "notNull"
+        },
+        {
+          "code": "minLength",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "name": "any type with notNull",
+      "type": "ANY",
+      "rules": [
+        {
+          "code": "notNull"
+        }
+      ]
+    }
+  ],
+  "maxDepth": {
+    "limit": 2,
+    "rejected": "a.b.c",
+    "accepted": "a.b"
+  }
+}

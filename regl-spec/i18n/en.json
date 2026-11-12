@@ -1,0 +1,204 @@
+{
+  "rules": {
+    "minLength": {
+      "name": "Minimum Length",
+      "description": "Requires text to be at least {value} characters.",
+      "error": "Field '{field}' must be at least {value} characters."
+    },
+    "maxLength": {
+      "name": "Maximum Length",
+      "description": "Requires text to be no longer than {value} characters.",
+      "error": "Field '{field}' must be no longer than {value} characters."
+    },
+    "length": {
+      "name": "Exact Length",
+      "description": "Requires text to be exactly {value} characters.",
+      "error": "Field '{field}' must be exactly {value} characters."
+    },
+    "pattern": {
+      "name": "Regex Pattern",
+      "description": "Requires text to match the regular expression: {value}.",
+      "error": "Field '{field}' must match pattern: {value}"
+    },
+    "contains": {
+      "name": "Contains Text",
+      "description": "Requires text to contain the substring: {value}.",
+      "error": "Field '{field}' must contain: {value}"
+    },
+    "startsWith": {
+      "name": "Starts With",
+      "description": "Requires text to start with: {value}.",
+      "error": "Field '{field}' must start with: {value}"
+    },
+    "endsWith": {
+      "name": "Ends With",
+      "description": "Requires text to end with: {value}.",
+      "error": "Field '{field}' must end with: {value}"
+    },
+    "email": {
+      "name": "Email Address",
+      "description": "Requires a valid email address format.",
+      "error": "Field '{field}' must be a valid email address."
+    },
+    "url": {
+      "name": "URL",
+      "description": "Requires a valid HTTP or HTTPS URL.",
+      "error": "Field '{field}' must be a valid URL."
+    },
+    "uuid": {
+      "name": "UUID",
+      "description": "Requires a valid UUID format.",
+      "error": "Field '{field}' must be a valid UUID."
+    },
+    "languageCode": {
+      "name": "Language Code",
+      "description": "Requires a well-formed BCP-47 language tag.",
+      "error": "Field '{field}' must be a valid language code."
+    },
+    "lowercase": {
+      "name": "Lowercase",
+      "description": "Requires all characters to be lowercase.",
+      "error": "Field '{field}' must be lowercase."
+    },
+    "uppercase": {
+      "name": "Uppercase",
+      "description": "Requires all characters to be uppercase.",
+      "error": "Field '{field}' must be uppercase."
+    },
+    "trimmed": {
+      "name": "Trimmed",
+      "description": "Requires no leading or trailing whitespace.",
+      "error": "Field '{field}' must not have leading or trailing whitespace."
+    },
+    "notEmpty": {
+      "name": "Not Empty",
+      "description": "Requires text to contain at least one non-whitespace character.",
+      "error": "Field '{field}' must not be empty."
+    },
+    "text": {
+      "name": "Human-Readable Text",
+      "description": "Marks a field as human-readable text.",
+      "error": "Field '{field}' is invalid text."
+    },
+    "notNull": {
+      "name": "Not Null",
+      "description": "Requires the value to be present and not null.",
+      "error": "Field '{field}' is required and must not be null."
+    },
+    "enum": {
+      "name": "Allowed Values",
+      "description": "Restricts the value to a predefined list of allowed strings: {value}.",
+      "error": "Value '{value}' in field '{field}' is not in allowed values: {value}."
+    },
+    "greaterThan": {
+      "name": "Greater Than",
+      "description": "Requires the number to be strictly greater than {value}.",
+      "error": "Field '{field}' must be strictly greater than {value}."
+    },
+    "greaterThanOrEqual": {
+      "name": "Greater Than or Equal",
+      "description": "Requires the number to be greater than or equal to {value}.",
+      "error": "Field '{field}' must be greater than or equal to {value}."
+    },
+    "lessThan": {
+      "name": "Less Than",
+      "description": "Requires the number to be strictly less than {value}.",
+      "error": "Field '{field}' must be strictly less than {value}."
+    },
+    "lessThanOrEqual": {
+      "name": "Less Than or Equal",
+      "description": "Requires the number to be less than or equal to {value}.",
+      "error": "Field '{field}' must be less than or equal to {value}."
+    },
+    "positive": {
+      "name": "Positive Number",
+      "description": "Requires a number strictly greater than zero.",
+      "error": "Field '{field}' must be positive."
+    },
+    "negative": {
+      "name": "Negative Number",
+      "description": "Requires a number strictly less than zero.",
+      "error": "Field '{field}' must be negative."
+    },
+    "positiveInteger": {
+      "name": "Positive Integer",
+      "description": "Requires a whole number strictly greater than zero.",
+      "error": "Field '{field}' must be a positive integer."
+    },
+    "negativeInteger": {
+      "name": "Negative Integer",
+      "description": "Requires a whole number strictly less than zero.",
+      "error": "Field '{field}' must be a negative integer."
+    },
+    "multipleOf": {
+      "name": "Multiple Of",
+      "description": "Requires the number to be a multiple of {value}.",
+      "error": "Field '{field}' must be a multiple of {value}."
+    },
+    "precision": {
+      "name": "Decimal Precision",
+      "description": "Restricts the maximum number of decimal places to {value}.",
+      "error": "Field '{field}' cannot have more than {value} decimal places."
+    },
+    "range": {
+      "name": "List Size Range",
+      "description": "Restricts the number of items in a list to the range {value}.",
+      "error": "Field '{field}' size must be within range {value}."
+    },
+    "unique": {
+      "name": "Unique Items",
+      "description": "Requires all items in the list to be distinct.",
+      "error": "Field '{field}' must contain unique items."
+    },
+    "isTrue": {
+      "name": "Is True",
+      "description": "Requires a boolean value to be true.",
+      "error": "Field '{field}' must be true."
+    },
+    "isFalse": {
+      "name": "Is False",
+      "description": "Requires a boolean value to be false.",
+      "error": "Field '{field}' must be false."
+    },
+    "dateFormat": {
+      "name": "Date Format",
+      "description": "Requires date/time string to match format pattern: {value}.",
+      "error": "Field '{field}' must match date format: {value}"
+    },
+    "isoDate": {
+      "name": "ISO Date",
+      "description": "Requires a valid ISO-8601 calendar date (YYYY-MM-DD).",
+      "error": "Field '{field}' must be a valid ISO-8601 date (YYYY-MM-DD)."
+    },
+    "isoDateTime": {
+      "name": "ISO Date-Time",
+      "description": "Requires a valid ISO-8601 date-time timestamp.",
+      "error": "Field '{field}' must be a valid ISO-8601 date-time timestamp."
+    },
+    "isoTime": {
+      "name": "ISO Time",
+      "description": "Requires a valid ISO-8601 time (HH:mm:ss).",
+      "error": "Field '{field}' must be a valid ISO-8601 time (HH:mm:ss)."
+    },
+    "epoch": {
+      "name": "Epoch Seconds",
+      "description": "Requires a whole-number Unix timestamp in seconds.",
+      "error": "Field '{field}' must be a valid whole-number Unix timestamp in seconds."
+    },
+    "epochMillis": {
+      "name": "Epoch Milliseconds",
+      "description": "Requires a whole-number Unix timestamp in milliseconds.",
+      "error": "Field '{field}' must be a valid whole-number Unix timestamp in milliseconds."
+    },
+    "after": {
+      "name": "After Date",
+      "description": "Requires date/time to be chronologically after {value}.",
+      "error": "Field '{field}' must be chronologically after {value}."
+    },
+    "before": {
+      "name": "Before Date",
+      "description": "Requires date/time to be chronologically before {value}.",
+      "error": "Field '{field}' must be chronologically before {value}."
+    }
+  }
+}

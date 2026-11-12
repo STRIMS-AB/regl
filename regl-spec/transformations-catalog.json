@@ -1,0 +1,198 @@
+{
+  "$schema": "https://regl.dev/schemas/v1/transformations-catalog.json",
+  "version": "1.0.0",
+  "updatedAt": "2026-10-16T10:00:00Z",
+  "categories": {
+    "STRING": [
+      {
+        "id": "lowerCase",
+        "name": "Lowercase",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Lowercases the string"
+      },
+      {
+        "id": "upperCase",
+        "name": "Uppercase",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Uppercases the string"
+      },
+      {
+        "id": "trim",
+        "name": "Trim Whitespace",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Strips leading and trailing whitespace"
+      },
+      {
+        "id": "titleCase",
+        "name": "Title Case",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Capitalizes the first letter of each whitespace-separated word and lowercases the rest"
+      },
+      {
+        "id": "prefix",
+        "name": "Prefix",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Prepends the parameter to the value",
+        "example": "sub_"
+      },
+      {
+        "id": "suffix",
+        "name": "Suffix",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Appends the parameter to the value",
+        "example": "@acme.com"
+      },
+      {
+        "id": "stripPrefix",
+        "name": "Strip Prefix",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Removes the leading occurrence of the parameter when present",
+        "example": "pi_"
+      },
+      {
+        "id": "stripSuffix",
+        "name": "Strip Suffix",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Removes the trailing occurrence of the parameter when present",
+        "example": ".json"
+      },
+      {
+        "id": "replace",
+        "name": "Replace All",
+        "parameterType": "object",
+        "requiresParameter": true,
+        "description": "Replaces all occurrences: { pattern, replacement }",
+        "example": {
+          "pattern": "-",
+          "replacement": "_"
+        }
+      },
+      {
+        "id": "substring",
+        "name": "Substring",
+        "parameterType": "object",
+        "requiresParameter": true,
+        "description": "Extracts a range: { start, end? }",
+        "example": {
+          "start": 0,
+          "end": 8
+        }
+      },
+      {
+        "id": "join",
+        "name": "Join Array",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Joins the array of a multi-field 'from' into a string separated by the parameter; null/undefined entries are skipped",
+        "example": " "
+      }
+    ],
+    "NUMBER": [
+      {
+        "id": "multiply",
+        "name": "Multiply",
+        "parameterType": "number",
+        "requiresParameter": true,
+        "description": "Multiplies the number by the parameter",
+        "example": 100
+      },
+      {
+        "id": "divide",
+        "name": "Divide",
+        "parameterType": "number",
+        "requiresParameter": true,
+        "description": "Divides the number by the parameter",
+        "example": 100
+      },
+      {
+        "id": "abs",
+        "name": "Absolute Value",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Absolute value"
+      },
+      {
+        "id": "round",
+        "name": "Round",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Rounds to the nearest integer"
+      },
+      {
+        "id": "roundTo",
+        "name": "Round To Decimals",
+        "parameterType": "integer",
+        "requiresParameter": true,
+        "description": "Rounds to the given number of decimals",
+        "example": 2
+      }
+    ],
+    "COERCION": [
+      {
+        "id": "toNumber",
+        "name": "To Number",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Coerces to a number when possible"
+      },
+      {
+        "id": "toString",
+        "name": "To String",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Coerces to a string"
+      },
+      {
+        "id": "toBoolean",
+        "name": "To Boolean",
+        "parameterType": null,
+        "requiresParameter": false,
+        "description": "Coerces to a boolean (true/1/yes, false/0/no)"
+      }
+    ],
+    "TEMPORAL": [
+      {
+        "id": "formatDate",
+        "name": "Format Date/Time",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Formats a date/time into the target model's format. The parameter is the SOURCE format: 'unix' (epoch seconds/millis) or a token pattern to parse a string from; blank = numbers as unix, strings as ISO. Named 'iso8601' outputs that value kind's ISO pattern, while 'epoch'/'epochMillis' outputs whole-number Unix seconds or milliseconds.",
+        "example": "unix"
+      }
+    ],
+    "COMMON": [
+      {
+        "id": "default",
+        "name": "Default Value",
+        "parameterType": "any",
+        "requiresParameter": true,
+        "description": "Returns the parameter when the value is null or blank",
+        "example": "unknown"
+      },
+      {
+        "id": "constant",
+        "name": "Constant Value",
+        "parameterType": "any",
+        "requiresParameter": true,
+        "description": "Always returns the parameter, ignoring the source value",
+        "example": "legacy-import"
+      },
+      {
+        "id": "custom",
+        "name": "Custom Function",
+        "parameterType": "string",
+        "requiresParameter": true,
+        "description": "Free-text reference resolved at runtime (Java: Function<Object,Object> lambda; TypeScript: resolver callback)",
+        "example": "com.acme.slug"
+      }
+    ]
+  }
+}

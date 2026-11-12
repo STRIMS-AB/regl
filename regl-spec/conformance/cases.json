@@ -1,0 +1,1702 @@
+{
+  "note": "Shared cross-engine conformance fixtures. Every case MUST yield the same verdict in regl-java and regl-ts. 'expected: true' means the rule PASSES. Note that 'pattern' uses partial matching (java Matcher.find, JS RegExp.test), so an unanchored pattern passes when it matches anywhere in the value. Type-mismatch cases (\"typeMismatch\": true) assert that a value of the wrong kind for a rule's targetType is reported as a FAILURE rather than coerced, skipped, or throwing: a rule only speaks about values of its own target type.",
+  "cases": [
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": "abc",
+      "expected": true
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": "ab",
+      "expected": false
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": "",
+      "expected": false
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": "abc",
+      "expected": true
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": "abcd",
+      "expected": false
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": "abc",
+      "expected": true
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": "ab",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": "abc",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": "ABC",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "[a-z]+",
+      "input": "abc123",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "[a-z]+",
+      "input": "123",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^\\d{3}-\\d{4}$",
+      "input": "555-1234",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^\\d{3}-\\d{4}$",
+      "input": "555-12x4",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^(?:ab)+$",
+      "input": "ababab",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^(?:ab)+$",
+      "input": "aba",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^a{2,3}$",
+      "input": "aaaa",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^(?=.*\\d)(?=.*[a-z])[a-z0-9]{6,}$",
+      "input": "abc123",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^(?=.*\\d)(?=.*[a-z])[a-z0-9]{6,}$",
+      "input": "abcdef",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "<.+?>",
+      "input": "<a><b>",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^(\\w)\\1$",
+      "input": "aa",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^(\\w)\\1$",
+      "input": "ab",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^\\w+$",
+      "input": "café",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": "",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "",
+      "input": "anything",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "\\.",
+      "input": "a.b",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^a.c$",
+      "input": "a c",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "^.$",
+      "input": "é",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[^\\s]+$",
+      "input": "no spaces",
+      "expected": false
+    },
+    {
+      "rule": "pattern",
+      "value": "\\bfoo\\b",
+      "input": "a foo b",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "(?<=\\$)\\d+",
+      "input": "cost $15",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "(?<year>\\d{4})-\\d{2}",
+      "input": "2026-10",
+      "expected": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": "abc\n",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "a@b.co\n",
+      "expected": false
+    },
+    {
+      "rule": "uuid",
+      "input": "123e4567-e89b-12d3-a456-426614174000\n",
+      "expected": false
+    },
+    {
+      "rule": "languageCode",
+      "input": "en-US\n",
+      "expected": false
+    },
+    {
+      "rule": "contains",
+      "value": "ell",
+      "input": "hello",
+      "expected": true
+    },
+    {
+      "rule": "contains",
+      "value": "xyz",
+      "input": "hello",
+      "expected": false
+    },
+    {
+      "rule": "startsWith",
+      "value": "he",
+      "input": "hello",
+      "expected": true
+    },
+    {
+      "rule": "startsWith",
+      "value": "lo",
+      "input": "hello",
+      "expected": false
+    },
+    {
+      "rule": "endsWith",
+      "value": "lo",
+      "input": "hello",
+      "expected": true
+    },
+    {
+      "rule": "endsWith",
+      "value": "he",
+      "input": "hello",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "user@example.com",
+      "expected": true
+    },
+    {
+      "rule": "email",
+      "input": "user.name+tag@sub.example.co.uk",
+      "expected": true
+    },
+    {
+      "rule": "email",
+      "input": "plainaddress",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "@example.com",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "user@",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "user@example",
+      "expected": false
+    },
+    {
+      "rule": "email",
+      "input": "user example@test.com",
+      "expected": false
+    },
+    {
+      "rule": "url",
+      "input": "https://example.com",
+      "expected": true
+    },
+    {
+      "rule": "url",
+      "input": "http://example.com/path?q=1",
+      "expected": true
+    },
+    {
+      "rule": "url",
+      "input": "ftp://example.com",
+      "expected": false
+    },
+    {
+      "rule": "url",
+      "input": "example.com",
+      "expected": false
+    },
+    {
+      "rule": "uuid",
+      "input": "123e4567-e89b-12d3-a456-426614174000",
+      "expected": true
+    },
+    {
+      "rule": "uuid",
+      "input": "123E4567-E89B-12D3-A456-426614174000",
+      "expected": true
+    },
+    {
+      "rule": "uuid",
+      "input": "not-a-uuid",
+      "expected": false
+    },
+    {
+      "rule": "languageCode",
+      "input": "en",
+      "expected": true
+    },
+    {
+      "rule": "languageCode",
+      "input": "en-US",
+      "expected": true
+    },
+    {
+      "rule": "languageCode",
+      "input": "zh-Hans-CN",
+      "expected": true
+    },
+    {
+      "rule": "languageCode",
+      "input": "e",
+      "expected": false
+    },
+    {
+      "rule": "lowercase",
+      "input": "hello",
+      "expected": true
+    },
+    {
+      "rule": "lowercase",
+      "input": "Hello",
+      "expected": false
+    },
+    {
+      "rule": "uppercase",
+      "input": "HELLO",
+      "expected": true
+    },
+    {
+      "rule": "uppercase",
+      "input": "Hello",
+      "expected": false
+    },
+    {
+      "rule": "trimmed",
+      "input": "hello",
+      "expected": true
+    },
+    {
+      "rule": "trimmed",
+      "input": " hello",
+      "expected": false
+    },
+    {
+      "rule": "notEmpty",
+      "input": "a",
+      "expected": true
+    },
+    {
+      "rule": "notEmpty",
+      "input": "   ",
+      "expected": false
+    },
+    {
+      "rule": "notEmpty",
+      "input": "",
+      "expected": false
+    },
+    {
+      "rule": "text",
+      "input": "anything",
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": "x",
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": 0,
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": false,
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": [],
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": {},
+      "expected": true
+    },
+    {
+      "rule": "notNull",
+      "input": null,
+      "expected": false
+    },
+    {
+      "rule": "notNull",
+      "input": "",
+      "expected": true
+    },
+    {
+      "rule": "enum",
+      "value": [
+        "red",
+        "green"
+      ],
+      "input": "red",
+      "expected": true
+    },
+    {
+      "rule": "enum",
+      "value": [
+        "red",
+        "green"
+      ],
+      "input": "blue",
+      "expected": false
+    },
+    {
+      "rule": "greaterThan",
+      "value": 5,
+      "input": 6,
+      "expected": true
+    },
+    {
+      "rule": "greaterThan",
+      "value": 5,
+      "input": 5,
+      "expected": false
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 5,
+      "input": 5,
+      "expected": true
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 5,
+      "input": 4,
+      "expected": false
+    },
+    {
+      "rule": "lessThan",
+      "value": 5,
+      "input": 4,
+      "expected": true
+    },
+    {
+      "rule": "lessThan",
+      "value": 5,
+      "input": 5,
+      "expected": false
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 5,
+      "input": 5,
+      "expected": true
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 5,
+      "input": 6,
+      "expected": false
+    },
+    {
+      "rule": "positive",
+      "input": 1,
+      "expected": true
+    },
+    {
+      "rule": "positive",
+      "input": 0,
+      "expected": false
+    },
+    {
+      "rule": "positive",
+      "input": -1,
+      "expected": false
+    },
+    {
+      "rule": "negative",
+      "input": -1,
+      "expected": true
+    },
+    {
+      "rule": "negative",
+      "input": 0,
+      "expected": false
+    },
+    {
+      "rule": "positiveInteger",
+      "input": 3,
+      "expected": true
+    },
+    {
+      "rule": "positiveInteger",
+      "input": 3.5,
+      "expected": false
+    },
+    {
+      "rule": "positiveInteger",
+      "input": 0,
+      "expected": false
+    },
+    {
+      "rule": "negativeInteger",
+      "input": -3,
+      "expected": true
+    },
+    {
+      "rule": "negativeInteger",
+      "input": -3.5,
+      "expected": false
+    },
+    {
+      "rule": "negativeInteger",
+      "input": 0,
+      "expected": false
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": 9,
+      "expected": true
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": 10,
+      "expected": false
+    },
+    {
+      "rule": "precision",
+      "value": 2,
+      "input": 1.25,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 2,
+      "input": 1.256,
+      "expected": false
+    },
+    {
+      "rule": "precision",
+      "value": 0,
+      "input": 5,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 2,
+      "input": 1.5,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 1,
+      "input": 1e-06,
+      "expected": false
+    },
+    {
+      "rule": "precision",
+      "value": 7,
+      "input": 1e-06,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 6,
+      "input": 1e-06,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 7,
+      "input": 1e-07,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 0,
+      "input": 100,
+      "expected": true
+    },
+    {
+      "rule": "precision",
+      "value": 0,
+      "input": -5,
+      "expected": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 3
+      },
+      "input": [
+        1,
+        2
+      ],
+      "expected": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 3
+      },
+      "input": [
+        1,
+        2,
+        3
+      ],
+      "expected": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 3
+      },
+      "input": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "expected": false
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 3
+      },
+      "input": [],
+      "expected": false
+    },
+    {
+      "rule": "unique",
+      "input": [
+        1,
+        2,
+        3
+      ],
+      "expected": true
+    },
+    {
+      "rule": "unique",
+      "input": [
+        1,
+        2,
+        1
+      ],
+      "expected": false
+    },
+    {
+      "rule": "isTrue",
+      "input": true,
+      "expected": true
+    },
+    {
+      "rule": "isTrue",
+      "input": false,
+      "expected": false
+    },
+    {
+      "rule": "isFalse",
+      "input": false,
+      "expected": true
+    },
+    {
+      "rule": "isFalse",
+      "input": true,
+      "expected": false
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "minLength",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "maxLength",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "length",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "pattern",
+      "value": "^[a-z]+$",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "contains",
+      "value": "abc",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "contains",
+      "value": "abc",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "contains",
+      "value": "abc",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "contains",
+      "value": "abc",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "startsWith",
+      "value": "abc",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "startsWith",
+      "value": "abc",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "startsWith",
+      "value": "abc",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "startsWith",
+      "value": "abc",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "endsWith",
+      "value": "abc",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "endsWith",
+      "value": "abc",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "endsWith",
+      "value": "abc",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "endsWith",
+      "value": "abc",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "email",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "email",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "email",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "email",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "url",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "url",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "url",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "url",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uuid",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uuid",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uuid",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uuid",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "languageCode",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "languageCode",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "languageCode",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "languageCode",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lowercase",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lowercase",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lowercase",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lowercase",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uppercase",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uppercase",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uppercase",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "uppercase",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "trimmed",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "trimmed",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "trimmed",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "trimmed",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "notEmpty",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "notEmpty",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "notEmpty",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "notEmpty",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "text",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "text",
+      "input": [
+        "a"
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "text",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "text",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThan",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThan",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThan",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThan",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "greaterThanOrEqual",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThan",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThan",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThan",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThan",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "lessThanOrEqual",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positive",
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positive",
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positive",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positive",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negative",
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negative",
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negative",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negative",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positiveInteger",
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positiveInteger",
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positiveInteger",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "positiveInteger",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negativeInteger",
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negativeInteger",
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negativeInteger",
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "negativeInteger",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "multipleOf",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "precision",
+      "value": 3,
+      "input": "abc",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "precision",
+      "value": 3,
+      "input": [
+        1,
+        2
+      ],
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "precision",
+      "value": 3,
+      "input": true,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "precision",
+      "value": 3,
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 10
+      },
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 10
+      },
+      "input": "ab",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "range",
+      "value": {
+        "min": 1,
+        "max": 10
+      },
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "unique",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "unique",
+      "input": "ab",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "unique",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isTrue",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isTrue",
+      "input": "true",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isTrue",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isFalse",
+      "input": 8080,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isFalse",
+      "input": "true",
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "isFalse",
+      "input": null,
+      "expected": false,
+      "typeMismatch": true
+    },
+    {
+      "rule": "dateFormat",
+      "value": "YYYY-MM-DD",
+      "input": "2026-10-02",
+      "expected": true
+    },
+    {
+      "rule": "dateFormat",
+      "value": "YYYY-MM-DD",
+      "input": "not-a-date",
+      "expected": false
+    },
+    {
+      "rule": "isoDate",
+      "input": "2026-10-02",
+      "expected": true
+    },
+    {
+      "rule": "isoDate",
+      "input": "2026/10/02",
+      "expected": false
+    },
+    {
+      "rule": "isoDateTime",
+      "input": "2026-10-02T08:30:00Z",
+      "expected": true
+    },
+    {
+      "rule": "isoDateTime",
+      "input": "invalid-datetime",
+      "expected": false
+    },
+    {
+      "rule": "isoTime",
+      "input": "14:30:00",
+      "expected": true
+    },
+    {
+      "rule": "isoTime",
+      "input": "invalid-time",
+      "expected": false
+    },
+    {
+      "rule": "epoch",
+      "input": 1727857800,
+      "expected": true
+    },
+    {
+      "rule": "epoch",
+      "input": -1,
+      "expected": false
+    },
+    {
+      "rule": "epochMillis",
+      "input": 1727857800000,
+      "expected": true
+    },
+    {
+      "rule": "epochMillis",
+      "input": -1,
+      "expected": false
+    },
+    {
+      "rule": "after",
+      "value": "2026-01-01",
+      "input": "2026-01-02",
+      "expected": true
+    },
+    {
+      "rule": "after",
+      "value": "2026-01-02",
+      "input": "2026-01-01",
+      "expected": false
+    },
+    {
+      "rule": "before",
+      "value": "2026-01-02",
+      "input": "2026-01-01",
+      "expected": true
+    },
+    {
+      "rule": "before",
+      "value": "2026-01-01",
+      "input": "2026-01-02",
+      "expected": false
+    }
+  ],
+  "typeCases": [
+    {
+      "type": "INTEGER",
+      "input": 5,
+      "expected": true
+    },
+    {
+      "type": "INTEGER",
+      "input": 0,
+      "expected": true
+    },
+    {
+      "type": "INTEGER",
+      "input": -3,
+      "expected": true
+    },
+    {
+      "type": "INTEGER",
+      "input": 1.0,
+      "expected": true,
+      "note": "a whole value written with a decimal point"
+    },
+    {
+      "type": "INTEGER",
+      "input": 1000.0,
+      "expected": true,
+      "note": "scientific notation is still whole"
+    },
+    {
+      "type": "INTEGER",
+      "input": 2147483648,
+      "expected": true,
+      "note": "above Integer.MAX_VALUE, so it arrives as Long"
+    },
+    {
+      "type": "INTEGER",
+      "input": 9007199254740993,
+      "expected": true,
+      "note": "above 2^53"
+    },
+    {
+      "type": "INTEGER",
+      "input": 5.5,
+      "expected": false,
+      "note": "a fractional part is the only thing that is not an INTEGER"
+    },
+    {
+      "type": "INTEGER",
+      "input": "5",
+      "expected": false,
+      "note": "no coercion (§8)"
+    },
+    {
+      "type": "INTEGER",
+      "input": true,
+      "expected": false
+    },
+    {
+      "type": "INTEGER",
+      "input": [
+        1,
+        2
+      ],
+      "expected": false
+    },
+    {
+      "type": "INTEGER",
+      "input": null,
+      "expected": false
+    },
+    {
+      "type": "NUMBER",
+      "input": 5,
+      "expected": true
+    },
+    {
+      "type": "NUMBER",
+      "input": 5.5,
+      "expected": true,
+      "note": "NUMBER accepts what INTEGER rejects"
+    },
+    {
+      "type": "NUMBER",
+      "input": "5",
+      "expected": false
+    },
+    {
+      "type": "NUMBER",
+      "input": null,
+      "expected": false
+    }
+  ]
+}

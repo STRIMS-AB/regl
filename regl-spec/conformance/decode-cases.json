@@ -1,0 +1,164 @@
+{
+  "note": "Decoder fixtures for §13 of document-schema.md: each case is a format, a text, and either the expected decoded tree (JSON can express the document model exactly) or error: true for a text that must fail to decode. Both engines' decoders assert against this one file.",
+  "cases": [
+    {
+      "name": "json flat object",
+      "format": "json",
+      "text": "{\"name\":\"regl\",\"port\":8080,\"debug\":false}",
+      "expected": { "name": "regl", "port": 8080, "debug": false }
+    },
+    {
+      "name": "json nested tree",
+      "format": "json",
+      "text": "{\"server\":{\"port\":8080,\"hosts\":[\"a\",\"b\"]},\"retries\":null}",
+      "expected": { "server": { "port": 8080, "hosts": ["a", "b"] }, "retries": null }
+    },
+    {
+      "name": "json scalar root",
+      "format": "json",
+      "text": "8080",
+      "expected": 8080
+    },
+    {
+      "name": "json list root",
+      "format": "json",
+      "text": "[1,2,3]",
+      "expected": [1, 2, 3]
+    },
+    {
+      "name": "json string escapes",
+      "format": "json",
+      "text": "{\"q\":\"say \\\"hi\\\"\",\"bs\":\"a\\\\b\"}",
+      "expected": { "q": "say \"hi\"", "bs": "a\\b" }
+    },
+    {
+      "name": "json malformed is a decode error",
+      "format": "json",
+      "text": "{\"name\": ",
+      "error": true
+    },
+    {
+      "name": "properties flat key",
+      "format": "properties",
+      "text": "name=regl\n",
+      "expected": { "name": "regl" }
+    },
+    {
+      "name": "properties dotted keys expand to nested objects",
+      "format": "properties",
+      "text": "server.port=8080\nserver.host=example.com\n",
+      "expected": { "server": { "port": "8080", "host": "example.com" } }
+    },
+    {
+      "name": "properties values are always strings",
+      "format": "properties",
+      "text": "port=8080\ndebug=true\nratio=1.5\nempty=\n",
+      "expected": { "port": "8080", "debug": "true", "ratio": "1.5", "empty": "" }
+    },
+    {
+      "name": "properties one literal dot needs the backslash escaped, and properties unescapes first",
+      "format": "properties",
+      "text": "example\\\\.com=up\n",
+      "expected": { "example.com": "up" }
+    },
+    {
+      "name": "properties a single backslash is consumed by properties unescaping, so the dot still splits",
+      "format": "properties",
+      "text": "a\\.b=x\n",
+      "expected": { "a": { "b": "x" } }
+    },
+    {
+      "name": "properties comments and whitespace around the separator",
+      "format": "properties",
+      "text": "# a comment\n! another comment\nname = regl\n",
+      "expected": { "name": "regl" }
+    },
+    {
+      "name": "properties leading value whitespace is skipped, trailing is kept",
+      "format": "properties",
+      "text": "trail= keep \n",
+      "expected": { "trail": "keep " }
+    },
+    {
+      "name": "properties line continuation",
+      "format": "properties",
+      "text": "path=one\\\n  two\n",
+      "expected": { "path": "onetwo" }
+    },
+    {
+      "name": "properties unicode escapes",
+      "format": "properties",
+      "text": "letter=\\u0041\\u0042\n",
+      "expected": { "letter": "AB" }
+    },
+    {
+      "name": "properties duplicate keys last-wins",
+      "format": "properties",
+      "text": "mode=fast\nmode=safe\n",
+      "expected": { "mode": "safe" }
+    },
+    {
+      "name": "properties an empty key is an invalid path",
+      "format": "properties",
+      "text": "=value\n",
+      "error": true
+    },
+    {
+      "name": "properties a dangling escape in the key is an invalid path",
+      "format": "properties",
+      "text": "a\\\\=1\n",
+      "error": true
+    },
+    {
+      "name": "properties a node cannot be both a leaf and an object",
+      "format": "properties",
+      "text": "a=1\na.b=2\n",
+      "error": true
+    },
+    {
+      "name": "yaml block mapping and sequence",
+      "format": "yaml",
+      "text": "name: regl\nserver:\n  port: 8080\nhosts:\n  - a\n  - b\n",
+      "expected": { "name": "regl", "server": { "port": 8080 }, "hosts": ["a", "b"] }
+    },
+    {
+      "name": "yaml flow style",
+      "format": "yaml",
+      "text": "{name: regl, ports: [1, 2]}\n",
+      "expected": { "name": "regl", "ports": [1, 2] }
+    },
+    {
+      "name": "yaml typed scalars",
+      "format": "yaml",
+      "text": "i: 42\nf: 1.5\nb: true\nn: null\nt: ~\ns: \"8080\"\n",
+      "expected": { "i": 42, "f": 1.5, "b": true, "n": null, "t": null, "s": "8080" }
+    },
+    {
+      "name": "yaml anchors and aliases",
+      "format": "yaml",
+      "text": "base: &base\n  port: 8080\nprod:\n  <<: *base\n  host: prod.example.com\n",
+      "expected": {
+        "base": { "port": 8080 },
+        "prod": { "port": 8080, "host": "prod.example.com" }
+      }
+    },
+    {
+      "name": "yaml malformed is a decode error",
+      "format": "yaml",
+      "text": "a: [unclosed\n",
+      "error": true
+    },
+    {
+      "name": "yaml several documents are not guessed between",
+      "format": "yaml",
+      "text": "a: 1\n---\nb: 2\n",
+      "error": true
+    },
+    {
+      "name": "yaml an empty stream is not a null document",
+      "format": "yaml",
+      "text": "# only a comment\n",
+      "error": true
+    }
+  ]
+}

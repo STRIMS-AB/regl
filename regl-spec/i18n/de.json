@@ -1,0 +1,204 @@
+{
+  "rules": {
+    "minLength": {
+      "name": "Mindestlänge",
+      "description": "Verlangt, dass der Text mindestens {value} Zeichen lang ist.",
+      "error": "Das Feld '{field}' muss mindestens {value} Zeichen lang sein."
+    },
+    "maxLength": {
+      "name": "Maximallänge",
+      "description": "Verlangt, dass der Text höchstens {value} Zeichen lang ist.",
+      "error": "Das Feld '{field}' darf höchstens {value} Zeichen lang sein."
+    },
+    "length": {
+      "name": "Genaue Länge",
+      "description": "Verlangt, dass der Text genau {value} Zeichen lang ist.",
+      "error": "Das Feld '{field}' muss genau {value} Zeichen lang sein."
+    },
+    "pattern": {
+      "name": "Regulärer Ausdruck",
+      "description": "Verlangt, dass der Text dem regulären Ausdruck entspricht: {value}.",
+      "error": "Das Feld '{field}' muss dem Muster entsprechen: {value}"
+    },
+    "contains": {
+      "name": "Enthält Text",
+      "description": "Verlangt, dass der Text die Teilzeichenkette enthält: {value}.",
+      "error": "Das Feld '{field}' muss enthalten: {value}"
+    },
+    "startsWith": {
+      "name": "Beginnt mit",
+      "description": "Verlangt, dass der Text damit beginnt: {value}.",
+      "error": "Das Feld '{field}' muss damit beginnen: {value}"
+    },
+    "endsWith": {
+      "name": "Endet mit",
+      "description": "Verlangt, dass der Text damit endet: {value}.",
+      "error": "Das Feld '{field}' muss damit enden: {value}"
+    },
+    "email": {
+      "name": "E-Mail-Adresse",
+      "description": "Verlangt ein gültiges Format einer E-Mail-Adresse.",
+      "error": "Das Feld '{field}' muss eine gültige E-Mail-Adresse sein."
+    },
+    "url": {
+      "name": "URL",
+      "description": "Verlangt eine gültige HTTP- oder HTTPS-URL.",
+      "error": "Das Feld '{field}' muss eine gültige URL sein."
+    },
+    "uuid": {
+      "name": "UUID",
+      "description": "Verlangt ein gültiges UUID-Format.",
+      "error": "Das Feld '{field}' muss eine gültige UUID sein."
+    },
+    "languageCode": {
+      "name": "Sprachcode",
+      "description": "Verlangt eine wohlgeformte BCP-47-Sprachkennung.",
+      "error": "Das Feld '{field}' muss ein gültiger Sprachcode sein."
+    },
+    "lowercase": {
+      "name": "Kleinbuchstaben",
+      "description": "Verlangt, dass alle Zeichen Kleinbuchstaben sind.",
+      "error": "Das Feld '{field}' muss in Kleinbuchstaben geschrieben sein."
+    },
+    "uppercase": {
+      "name": "Großbuchstaben",
+      "description": "Verlangt, dass alle Zeichen Großbuchstaben sind.",
+      "error": "Das Feld '{field}' muss in Großbuchstaben geschrieben sein."
+    },
+    "trimmed": {
+      "name": "Ohne Leerraum",
+      "description": "Verlangt, dass weder am Anfang noch am Ende Leerzeichen stehen.",
+      "error": "Das Feld '{field}' darf weder am Anfang noch am Ende Leerzeichen enthalten."
+    },
+    "notEmpty": {
+      "name": "Nicht leer",
+      "description": "Verlangt, dass der Text mindestens ein Zeichen ungleich Leerzeichen enthält.",
+      "error": "Das Feld '{field}' darf nicht leer sein."
+    },
+    "text": {
+      "name": "Lesbarer Text",
+      "description": "Kennzeichnet das Feld als für Menschen lesbarer Text.",
+      "error": "Das Feld '{field}' ist kein gültiger Text."
+    },
+    "notNull": {
+      "name": "Nicht null",
+      "description": "Erfordert, dass der Wert vorhanden und nicht null ist.",
+      "error": "Das Feld '{field}' ist erforderlich und darf nicht null sein."
+    },
+    "enum": {
+      "name": "Zulässige Werte",
+      "description": "Beschränkt den Wert auf eine vordefinierte Liste zulässiger Zeichenketten: {value}.",
+      "error": "Der Wert '{value}' des Feldes '{field}' ist nicht unter den zulässigen Werten: {value}."
+    },
+    "greaterThan": {
+      "name": "Größer als",
+      "description": "Verlangt, dass die Zahl strikt größer als {value} ist.",
+      "error": "Das Feld '{field}' muss strikt größer als {value} sein."
+    },
+    "greaterThanOrEqual": {
+      "name": "Größer oder gleich",
+      "description": "Verlangt, dass die Zahl größer oder gleich {value} ist.",
+      "error": "Das Feld '{field}' muss größer oder gleich {value} sein."
+    },
+    "lessThan": {
+      "name": "Kleiner als",
+      "description": "Verlangt, dass die Zahl strikt kleiner als {value} ist.",
+      "error": "Das Feld '{field}' muss strikt kleiner als {value} sein."
+    },
+    "lessThanOrEqual": {
+      "name": "Kleiner oder gleich",
+      "description": "Verlangt, dass die Zahl kleiner oder gleich {value} ist.",
+      "error": "Das Feld '{field}' muss kleiner oder gleich {value} sein."
+    },
+    "positive": {
+      "name": "Positive Zahl",
+      "description": "Verlangt eine Zahl strikt größer als null.",
+      "error": "Das Feld '{field}' muss positiv sein."
+    },
+    "negative": {
+      "name": "Negative Zahl",
+      "description": "Verlangt eine Zahl strikt kleiner als null.",
+      "error": "Das Feld '{field}' muss negativ sein."
+    },
+    "positiveInteger": {
+      "name": "Positive Ganzzahl",
+      "description": "Verlangt eine ganze Zahl strikt größer als null.",
+      "error": "Das Feld '{field}' muss eine positive ganze Zahl sein."
+    },
+    "negativeInteger": {
+      "name": "Negative Ganzzahl",
+      "description": "Verlangt eine ganze Zahl strikt kleiner als null.",
+      "error": "Das Feld '{field}' muss eine negative ganze Zahl sein."
+    },
+    "multipleOf": {
+      "name": "Vielfaches von",
+      "description": "Verlangt, dass die Zahl ein Vielfaches von {value} ist.",
+      "error": "Das Feld '{field}' muss ein Vielfaches von {value} sein."
+    },
+    "precision": {
+      "name": "Dezimalgenauigkeit",
+      "description": "Begrenzt die Zahl auf höchstens {value} Nachkommastellen.",
+      "error": "Das Feld '{field}' darf nicht mehr als {value} Nachkommastellen haben."
+    },
+    "range": {
+      "name": "Größenbereich",
+      "description": "Beschränkt die Anzahl der Elemente einer Liste auf den Bereich {value}.",
+      "error": "Die Größe des Feldes '{field}' muss im Bereich {value} liegen."
+    },
+    "unique": {
+      "name": "Eindeutige Elemente",
+      "description": "Verlangt, dass alle Elemente der Liste verschieden sind.",
+      "error": "Das Feld '{field}' muss eindeutige Elemente enthalten."
+    },
+    "isTrue": {
+      "name": "Ist wahr",
+      "description": "Verlangt, dass ein boolescher Wert wahr ist.",
+      "error": "Das Feld '{field}' muss wahr sein."
+    },
+    "isFalse": {
+      "name": "Ist falsch",
+      "description": "Verlangt, dass ein boolescher Wert falsch ist.",
+      "error": "Das Feld '{field}' muss falsch sein."
+    },
+    "dateFormat": {
+      "name": "Datumsformat",
+      "description": "Verlangt, dass die Datums-/Zeitzeichenfolge dem Formatmuster entspricht: {value}.",
+      "error": "Das Feld '{field}' muss dem Datumsformat entsprechen: {value}"
+    },
+    "isoDate": {
+      "name": "ISO-Datum",
+      "description": "Verlangt ein gültiges Kalenderdatum nach ISO 8601 (YYYY-MM-DD).",
+      "error": "Das Feld '{field}' muss ein gültiges ISO-8601-Datum (YYYY-MM-DD) sein."
+    },
+    "isoDateTime": {
+      "name": "ISO-Datumszeit",
+      "description": "Verlangt einen gültigen Datums-/Zeitstempel nach ISO 8601.",
+      "error": "Das Feld '{field}' muss ein gültiger ISO-8601-Datums-/Zeitstempel sein."
+    },
+    "isoTime": {
+      "name": "ISO-Uhrzeit",
+      "description": "Verlangt eine gültige Uhrzeit nach ISO 8601 (HH:mm:ss).",
+      "error": "Das Feld '{field}' muss eine gültige ISO-8601-Uhrzeit (HH:mm:ss) sein."
+    },
+    "epoch": {
+      "name": "Epoch-Sekunden",
+      "description": "Verlangt einen ganzzahligen Unix-Zeitstempel in Sekunden.",
+      "error": "Das Feld '{field}' muss ein gültiger ganzzahliger Unix-Zeitstempel in Sekunden sein."
+    },
+    "epochMillis": {
+      "name": "Epoch-Millisekunden",
+      "description": "Verlangt einen ganzzahligen Unix-Zeitstempel in Millisekunden.",
+      "error": "Das Feld '{field}' muss ein gültiger ganzzahliger Unix-Zeitstempel in Millisekunden sein."
+    },
+    "after": {
+      "name": "Nach Datum",
+      "description": "Verlangt, dass Datum/Uhrzeit chronologisch nach {value} liegt.",
+      "error": "Das Feld '{field}' muss chronologisch nach {value} liegen."
+    },
+    "before": {
+      "name": "Vor Datum",
+      "description": "Verlangt, dass Datum/Uhrzeit chronologisch vor {value} liegt.",
+      "error": "Das Feld '{field}' muss chronologisch vor {value} liegen."
+    }
+  }
+}
